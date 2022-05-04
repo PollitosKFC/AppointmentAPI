@@ -30,7 +30,7 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentCreated);
     }
 
-    @GetMapping("/updateAppointment")
+    @PutMapping("/updateAppointment")
     public ResponseEntity<Appointment> updateAppointment(@RequestBody Appointment appointment,
                                                          @RequestParam(name = "customerId",required = false) Long customerId,
                                                          @RequestParam(name = "technicianId",required = false) Long technicianId) {
@@ -38,7 +38,7 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentUpdated);
     }
 
-    @GetMapping("/deleteAppointment")
+    @PutMapping("/deleteAppointment")
     public ResponseEntity<Appointment> deleteAppointment(@RequestBody Appointment appointment,
                                                          @RequestParam(name = "customerId",required = false) Long customerId,
                                                          @RequestParam(name = "technicianId",required = false) Long technicianId) {

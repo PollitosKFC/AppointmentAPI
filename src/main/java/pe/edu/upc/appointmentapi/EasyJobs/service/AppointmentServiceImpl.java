@@ -29,18 +29,17 @@ public class AppointmentServiceImpl  implements AppointmentService {
 
     @Override
     public Appointment createAppointment(Appointment appointment, Long customerId, Long technicianId) {
-        appointment.setCustomerId(customerRepository.findById(customerId).orElse(null));
-        appointment.setTechnicianId(technicianRepository.findById(technicianId).orElse(null));
+        appointment.setCustomer(customerRepository.findById(customerId).orElse(null));
+        appointment.setTechnician(technicianRepository.findById(technicianId).orElse(null));
         appointment.setCreatedDate(new Date());
         appointment.setDelete(false);
         appointment.setStatus("PENDING");
         return appointmentRepository.save(appointment);
-
     }
 
     @Override
     public Appointment updateAppointment(Appointment appointment, Long customerId, Long technicianId) {
-        Appointment appointment1 = appointmentRepository.findByCutomerIdAndTechcinianId(customerId, technicianId);
+        Appointment appointment1 = appointmentRepository.findByCustomerIdAndTechnicianId(customerId, technicianId);
         if (appointment1 == null) {
             return null;
         }
@@ -53,7 +52,7 @@ public class AppointmentServiceImpl  implements AppointmentService {
 
     @Override
     public Appointment deleteAppointment(Appointment appointment, Long customerId, Long technicianId) {
-        Appointment appointment1 = appointmentRepository.findByCutomerIdAndTechcinianId(customerId, technicianId);
+        Appointment appointment1 = appointmentRepository.findByCustomerIdAndTechnicianId(customerId, technicianId);
         if (appointment1 == null) {
             return null;
         }

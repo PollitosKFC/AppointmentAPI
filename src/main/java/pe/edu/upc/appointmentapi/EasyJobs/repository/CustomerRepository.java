@@ -21,5 +21,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     List<Technician> findTechniciansByCustomerIdAndStatus(Long id, String status);
 
     // list all the appointments of a customer
+    @Query(value ="SELECT a FROM Appointment a WHERE a.customer.id = ?1")
     List<Appointment> findAppointmentsByCustomerId(Long id);
 }

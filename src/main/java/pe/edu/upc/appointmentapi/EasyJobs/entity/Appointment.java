@@ -9,8 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "tbl_appointment")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name ="tbl_appointment")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,10 +37,10 @@ public class Appointment {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "technician_id",unique = true)
-    private Technician technicianId;
+    private Technician technician;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id",unique = true)
-    private Customer customerId;
+    private Customer customer;
 
 }

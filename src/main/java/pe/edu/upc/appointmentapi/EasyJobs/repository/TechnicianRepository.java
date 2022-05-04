@@ -22,5 +22,6 @@ public interface TechnicianRepository extends JpaRepository<Technician, Long> {
     List<Customer> findCustomersByTechnicianIdAndStatus(Long id, String status);
 
     // list all the appointments of a technician
+    @Query(value ="SELECT a FROM Appointment a WHERE a.technician.id = ?1")
     List<Appointment> findAppointmentsByTechnicianId(Long id);
 }
