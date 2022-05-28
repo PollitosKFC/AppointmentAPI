@@ -1,5 +1,6 @@
 package pe.edu.upc.appointmentapi.EasyJobs.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,32 +22,35 @@ public class Customer  extends User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column(unique = true, length = 40)
-    private Long phoneNumber_n;
+    private Long phoneNumber;
 
     @NotNull
-    @Column(unique = true, length = 200)
-    private String firstName_n;
+    @Column(name = "firstName", length = 200)
+    private String firstName;
 
     @NotNull
-    @Column(unique = true, length = 200)
-    private String lastName_n;
-
-    @Column(unique = true, length = 200)
-    private String address_n;
+    @Column(name = "lastName", length = 200)
+    private String lastName;
 
     @NotNull
-    @Column(unique = true, length = 200)
-    private String city_n;
+    @Column(name = "address", length = 200)
+    private String address;
 
     @NotNull
-    @Column(unique = true, length = 200)
-    private String district_n;
+    @Column(name = "city", length = 200)
+    private String city;
 
     @NotNull
-    @Column(unique = true, length = 200)
-    private String gender_n;
+    @Column(name = "district", length = 200)
+    private String district;
 
+    @NotNull
+    @Column(name = "gender", length = 200)
+    private String gender;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Appointment> customer_appointment;
 }

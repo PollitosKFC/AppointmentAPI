@@ -1,56 +1,54 @@
 package pe.edu.upc.appointmentapi.EasyJobs.entity;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.Date;
-
 @Data
 @MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User{
 
     @NotNull
-    @Column(unique = true, length = 200)
+    @Column(name = "userName",length = 200)
     private String userName;
 
     @NotNull
-    @Column(unique = true, length = 250)
+    @Column(name = "password", length = 250)
     private String password;
 
     @NotNull
-    @Column(unique = true, length = 250)
+    @Column(name = "email", length = 250)
     private String email;
 
     @NotNull
-    @Column(unique = true, length = 50)
+    @Column(name = "type", length = 50)
     private String type;
 
     @NotNull
-    @Column(unique = true, length = 200)
+    @Column(name = "identificationType", length = 200)
     private String identificationType;
 
     @NotNull
-    @Column()
+    @Column(name = "identificationNumber")
     private int identificationNumber;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(unique = true)
+    @Column(name = "registerDate")
     private Date registerDate;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(unique = true)
+    @Column(name = "updatedDate")
     private Date updatedDate;
+
+    @NotNull
+    @Column(name = "activated")
+    private Boolean activated;
 
 }

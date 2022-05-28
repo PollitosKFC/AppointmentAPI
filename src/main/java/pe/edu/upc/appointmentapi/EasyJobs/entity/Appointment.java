@@ -1,5 +1,6 @@
 package pe.edu.upc.appointmentapi.EasyJobs.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,28 +20,32 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(name = "name", length = 200)
+    private String name;
+
+    @Column(name = "createdDate")
     private Date createdDate;
 
-    @Column(unique = true)
+    @Column(name = "updateDate")
     private Date updateDate;
 
-    @Column(unique = true, length = 200)
+    @Column(name = "status", length = 200)
     private String status;
 
-    @Column(unique = true)
+    @Column(name = "startDate")
     private Date startDate;
 
-    @Column(unique = true)
-    private boolean delete;
+    @Column(name = "delete")
+    private Boolean delete;
 
-
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "technician_id",unique = true)
+    @JoinColumn(name = "technician_id")
     private Technician technician;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id",unique = true)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
 }

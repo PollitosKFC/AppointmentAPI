@@ -14,14 +14,16 @@ import java.util.List;
 public interface TechnicianRepository extends JpaRepository<Technician, Long> {
 
     // find all the customers of a specific technician
-    @Query(value ="SELECT c FROM Customer c JOIN Appointment a WHERE a.technician.id = ?1 AND a.customer.id = c.id")
+   // @Query(value ="SELECT c FROM Customer c JOIN Appointment a WHERE a.technician.id = ?1 AND a.customer.id = c.id")
+    //List<Customer> findCustomersByTechnicianId(Long id);
+     @Query(value ="SELECT c FROM Customer c JOIN fetch c.customer_appointment a WHERE a.technician.id = ?1 AND a.customer.id = c.id AND a.delete = false")
     List<Customer> findCustomersByTechnicianId(Long id);
 
     // find all clients of a technician based on appointment status
-    @Query(value ="SELECT c FROM Customer c JOIN Appointment a WHERE a.technician.id = ?1 AND a.customer.id = c.id AND a.status = ?2")
+    @Query(value ="SELECT c FROM Customer c JOIN fetch c.customer_appointment a WHERE a.technician.id = ?1 AND a.customer.id = c.id AND a.status = ?2 AND a.delete = false")
     List<Customer> findCustomersByTechnicianIdAndStatus(Long id, String status);
 
-    // list all the appointments of a technician
-    @Query(value ="SELECT a FROM Appointment a WHERE a.technician.id = ?1")
-    List<Appointment> findAppointmentsByTechnicianId(Long id);
+    // list all technicians
+    @Query(value ="SELECT t FROM Technician t WHERE t.activated = true")
+    List<Technician> getAllTechnicians();
 }

@@ -13,14 +13,14 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     // find all the technician of a specific customer
-    @Query(value ="SELECT t FROM Technician t JOIN Appointment a WHERE a.customer.id =?1 AND a.technician.id = t.id")
+    @Query(value ="SELECT t FROM Technician t JOIN fetch t.technician_appointment a WHERE a.customer.id =?1 AND a.technician.id = t.id AND a.delete = false")
     List<Technician> findTechniciansByCustomerId(Long id);
 
     // find all technician of a customer based on appointment status
-    @Query(value ="SELECT t FROM Technician t JOIN Appointment a WHERE a.customer.id = ?1 AND a.technician.id = t.id AND a.status = ?2")
+    @Query(value ="SELECT t FROM Technician t JOIN fetch t.technician_appointment a WHERE a.customer.id = ?1 AND a.technician.id = t.id AND a.status = ?2 AND a.delete = false")
     List<Technician> findTechniciansByCustomerIdAndStatus(Long id, String status);
 
-    // list all the appointments of a customer
-    @Query(value ="SELECT a FROM Appointment a WHERE a.customer.id = ?1")
-    List<Appointment> findAppointmentsByCustomerId(Long id);
+    // list all customers
+    @Query(value ="SELECT c FROM Customer c WHERE c.activated = true")
+    List<Customer> findAllCustomer();
 }
