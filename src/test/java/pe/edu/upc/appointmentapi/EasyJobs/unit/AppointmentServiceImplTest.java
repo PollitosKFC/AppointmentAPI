@@ -71,4 +71,32 @@ public class AppointmentServiceImplTest {
         // Assert
         assertThat(appointmentResult).isEqualTo(appointment);
     }
+    @Test
+    @DisplayName("When UpdateAppointment with valid data then return Appointment")
+    public void WhenUpdateAppointmentWithValidDataThenReturnAppointment() {
+        // Arrange
+        Long id = 1L;
+        Appointment appointment = new Appointment();
+        appointment.setId(id);
+
+
+        Appointment appointmentUp = new Appointment();
+        appointmentUp.setName("Name");
+        appointmentUp.setCreatedDate(null);
+        appointmentUp.setUpdateDate(null);
+        appointmentUp.setStatus("status");
+
+        Long customerId = 1L;
+        Long technicianId = 1L;
+        String name = "Appointment1";
+
+        when(appointmentRepository.save(appointment)).thenAnswer(invocation -> invocation.getArgument(0));
+        appointmentService.updateAppointment(appointmentUp, customerId, technicianId, name);
+
+        // Act
+        Appointment appointmentResult = appointmentRepository.getById(id);
+
+        // Assert
+        assertThat(appointmentResult).isEqualTo(appointmentRepository.getById(id));
+    }
 }
