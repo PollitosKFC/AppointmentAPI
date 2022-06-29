@@ -99,4 +99,22 @@ public class AppointmentServiceImplTest {
         // Assert
         assertThat(appointmentResult).isEqualTo(appointmentRepository.getById(id));
     }
+    @Test
+    @DisplayName("When Delete Appointment With Valid Appointment")
+    public void WhenDeleteAppointmentWithValidAppointment() {
+        // Arrange
+        Appointment appointment = new Appointment();
+        appointment.setId(1L);
+        appointment.setName("Name");
+        appointment.setCreatedDate(null);
+        appointment.setUpdateDate(null);
+        appointment.setStatus("status");
+
+        when(appointmentRepository.save(appointment)).thenAnswer(invocation -> invocation.getArgument(0));
+        appointmentRepository.deleteById(1L);
+        // Act
+        Appointment appointmentResult = null;
+        // Assert
+        assertThat(appointmentResult).isEqualTo(appointmentRepository.getById(1L));
+    }
 }
