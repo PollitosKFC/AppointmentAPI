@@ -54,7 +54,7 @@ public class AppointmentServiceImplTest {
     public void WhenCreatedCustomerWithValidDataThenReturnCustomer() {
         // Arrange
         Appointment appointment = new Appointment();
-        appointment.setId(null);
+        appointment.setId(1L);
         appointment.setName("name");
         appointment.setCreatedDate(null);
         appointment.setUpdateDate(null);
@@ -69,7 +69,7 @@ public class AppointmentServiceImplTest {
         Appointment appointmentResult = appointmentService.createAppointment(appointment,customerId,technicianId);
 
         // Assert
-        assertThat(appointmentResult).isEqualTo(appointment);
+        assertThat(appointmentResult).isEqualTo(appointmentRepository.getById(1L));
     }
     @Test
     @DisplayName("When UpdateAppointment with valid data then return Appointment")
